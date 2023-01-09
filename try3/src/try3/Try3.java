@@ -12,34 +12,27 @@ public class Try3 {
     
 }
 class inputAndConnection{
-    String fname, mname, lname, address, number;
+    String username, password, role;
     public void start(){
         // Userinput
         Scanner input = new Scanner(System.in); 
         System.out.println("Enter Data: ");
-        System.out.print("First Name: ");
-        fname = input.nextLine();
-        System.out.print("Middle Name: ");
-        mname = input.nextLine();
-        System.out.print("Last Name: ");
-        lname = input.nextLine();
-        System.out.print("Address: ");
-        address = input.nextLine();
-        System.out.print("Contact Number: ");
-        number = input.nextLine();
+        System.out.print("Username: ");
+        username = input.nextLine();
+        System.out.print("Password: ");
+        password = input.nextLine();
+        role = "student";
     }
     
     public void connectionDB(){
        try{
-            String db = "jdbc:mysql://localhost:3306/try2";
+            String db = "jdbc:mysql://localhost:3306/joysis_ams";
             Connection conn = DriverManager.getConnection(db, "root", null);
-            String qry = "INSERT INTO personalinfo values (null, ? ,?, ?, ?, ?)";
+            String qry = "INSERT INTO login values (?, ?, ?)";
             PreparedStatement pstmnt = conn.prepareStatement(qry);
-            pstmnt.setString(1, fname);
-            pstmnt.setString(2, mname);
-            pstmnt.setString(3, lname);
-            pstmnt.setString(4, address);
-            pstmnt.setString(5, number);
+            pstmnt.setString(1, username);
+            pstmnt.setString(2, password);
+            pstmnt.setString(3, role);
             pstmnt.executeUpdate();
             System.out.println("Data Inserted");
        
